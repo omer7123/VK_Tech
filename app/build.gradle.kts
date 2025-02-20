@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id ("com.google.devtools.ksp")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -15,6 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField ("String", "API_KEY", "\"48942904-6939f782dd56810607b7c1ef7\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -36,6 +38,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -52,6 +55,14 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //Retorfit
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation (libs.kotlinx.serialization.json)
+    implementation(libs.retrofit)
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
+
+    //Dagger2
     implementation (libs.dagger)
     ksp (libs.dagger.compiler)
 }
