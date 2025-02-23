@@ -24,7 +24,10 @@ class ContentViewModel @Inject constructor(
         viewModelScope.launch {
             getLatestVideoUseCase().collect{ resource->
                 when(resource){
-                    is Resource.Error -> _screenState.value = ContentScreenState.Error(resource.msg.toString())
+                    is Resource.Error -> {
+                        Log.e("VM Error", resource.responseCode.toString())
+                        _screenState.value = ContentScreenState.Error(resource.msg.toString())
+                    }
                     Resource.Loading -> _screenState.value = ContentScreenState.Loading
                     is Resource.Success -> {
                         Log.e("Success", resource.data.toString())

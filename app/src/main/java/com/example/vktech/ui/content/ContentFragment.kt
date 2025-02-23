@@ -18,6 +18,7 @@ import com.example.vktech.presentation.content.ContentScreenState
 import com.example.vktech.presentation.content.ContentViewModel
 import com.example.vktech.presentation.multiViewModelFactory.MultiViewModelFactory
 import com.example.vktech.util.getAppComponent
+import com.example.vktech.util.showToast
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -93,7 +94,7 @@ class ContentFragment : Fragment() {
                 renderContent(state.data)
             }
             is ContentScreenState.Error -> {
-
+                requireContext().showToast(state.msg)
             }
             ContentScreenState.Initial -> Unit
             ContentScreenState.Loading -> {

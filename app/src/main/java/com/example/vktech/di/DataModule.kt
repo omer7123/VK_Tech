@@ -1,7 +1,11 @@
 package com.example.vktech.di
 
-import com.example.vktech.data.remote.ApiKeyInterceptor
+import android.content.Context
+import com.example.vktech.data.core.LiveNetworkMonitor
+import com.example.vktech.data.core.NetworkMonitor
+import com.example.vktech.data.remote.interceptors.ApiKeyInterceptor
 import com.example.vktech.data.remote.ContentApi
+import com.example.vktech.data.remote.interceptors.NetworkMonitorInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -27,16 +31,33 @@ class DataModule {
         ignoreUnknownKeys = true
     }
 
+    @Provides
+    fun provideNetworkMonitor(
+        appContext: Context
+    ): NetworkMonitor{
+        return LiveNetworkMonitor(appContext)
+    }
+
+    @Provides
+    fun provideNetworkMonitorInterceptor(
+        liveNetworkMonitor: NetworkMonitor,
+    ): NetworkMonitorInterceptor {
+        return NetworkMonitorInterceptor(liveNetworkMonitor)
+    }
+
     @Reusable
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(
+        networkMonitorInterceptor: NetworkMonitorInterceptor
+    ): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
         return OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(networkMonitorInterceptor)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(ApiKeyInterceptor())
             .build()

@@ -1,4 +1,4 @@
-package com.example.vktech.data.remote
+package com.example.vktech.data.remote.interceptors
 
 import com.example.vktech.BuildConfig
 import okhttp3.Interceptor
