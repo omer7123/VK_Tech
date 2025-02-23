@@ -1,9 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.VKTech" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorContainer">@color/bg_color</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
     </style>
 
     <style name="Theme.VKTech" parent="Base.Theme.VKTech" />
+
+
+    <color name="white">#FFFFFF</color>
 </resources>

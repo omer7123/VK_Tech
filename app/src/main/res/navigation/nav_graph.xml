@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contentFragment"
-        android:name="com.example.vktech.ui.contentFragment.ContentFragment"
+        android:name="com.example.vktech.ui.content.ContentFragment"
         android:label="fragment_content"
         tools:layout="@layout/fragment_content" />
 </navigation>

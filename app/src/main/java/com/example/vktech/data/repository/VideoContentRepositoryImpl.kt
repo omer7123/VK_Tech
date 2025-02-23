@@ -11,8 +11,8 @@ import javax.inject.Inject
 class VideoContentRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ): VideoContentRepository {
-    override suspend fun getMostPopularVideo(): Flow<Resource<ContentEntity>> {
-        return remoteDataSource.getMostPopularVideo().checkResource {
+    override suspend fun getLatestVideo(): Flow<Resource<ContentEntity>> {
+        return remoteDataSource.getLatestVideo().checkResource {
             it.toEntity()
         }
     }

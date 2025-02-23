@@ -2,7 +2,7 @@ package com.example.vktech.di
 
 import android.content.Context
 import com.example.vktech.ui.MainActivity
-import com.example.vktech.ui.contentFragment.ContentFragment
+import com.example.vktech.ui.content.ContentFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

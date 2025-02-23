@@ -1,4 +1,4 @@
-package com.example.vktech.presentation.contentFragment
+package com.example.vktech.presentation.content
 
 import com.example.vktech.domain.entity.ContentEntity
 

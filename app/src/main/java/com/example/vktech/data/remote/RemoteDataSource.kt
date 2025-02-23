@@ -5,5 +5,5 @@ import com.example.vktech.data.model.ContentModel
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
-    suspend fun getMostPopularVideo(): Flow<Resource<ContentModel>>
+    suspend fun getLatestVideo(): Flow<Resource<ContentModel>>
 }

@@ -5,5 +5,5 @@ import com.example.vktech.domain.entity.ContentEntity
 import kotlinx.coroutines.flow.Flow
 
 interface VideoContentRepository {
-    suspend fun getMostPopularVideo(): Flow<Resource<ContentEntity>>
+    suspend fun getLatestVideo(): Flow<Resource<ContentEntity>>
 }
