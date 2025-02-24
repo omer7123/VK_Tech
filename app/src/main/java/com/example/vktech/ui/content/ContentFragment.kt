@@ -5,18 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.vktech.R
 import com.example.vktech.databinding.FragmentContentBinding
 import com.example.vktech.domain.entity.ContentEntity
 import com.example.vktech.domain.entity.VideoInfoEntity
 import com.example.vktech.presentation.content.ContentScreenState
 import com.example.vktech.presentation.content.ContentViewModel
 import com.example.vktech.presentation.multiViewModelFactory.MultiViewModelFactory
+import com.example.vktech.ui.player.PlayerFragment
 import com.example.vktech.util.getAppComponent
 import com.example.vktech.util.showToast
 import kotlinx.coroutines.flow.launchIn
@@ -85,7 +89,10 @@ class ContentFragment : Fragment() {
     }
 
     private fun onItemClick(videoInfoEntity: VideoInfoEntity) {
-
+        findNavController().navigate(
+            R.id.action_contentFragment_to_playerFragment,
+            bundleOf(PlayerFragment.VIDEO_ID to videoInfoEntity.id)
+        )
     }
 
     private fun renderState(state: ContentScreenState) {
@@ -111,7 +118,6 @@ class ContentFragment : Fragment() {
     private fun renderContent(data: ContentEntity) {
         binding.progress.isVisible = false
         binding.content.isVisible = true
-        binding.seriesTv.text = data.total.toString()
         adapter.submitList(data.hits)
         binding.swipeRefresh.isRefreshing = false
     }

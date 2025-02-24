@@ -9,5 +9,14 @@
         android:id="@+id/contentFragment"
         android:name="com.example.vktech.ui.content.ContentFragment"
         android:label="fragment_content"
-        tools:layout="@layout/fragment_content" />
+        tools:layout="@layout/fragment_content" >
+        <action
+            android:id="@+id/action_contentFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.vktech.ui.player.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player" />
 </navigation>

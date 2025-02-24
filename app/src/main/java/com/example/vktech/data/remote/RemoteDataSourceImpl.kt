@@ -12,9 +12,16 @@ import javax.inject.Inject
 class RemoteDataSourceImpl @Inject constructor(
     private val api: ContentApi
 ): RemoteDataSource, BaseDataSource() {
+
     override suspend fun getLatestVideo(): Flow<Resource<ContentModel>> = flow {
         emit(Resource.Loading)
         val result = getResult { api.getLatestVideos() }
+        emit(result)
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getVideoById(videoId: Int): Flow<Resource<ContentModel>> = flow<Resource<ContentModel>> {
+        emit(Resource.Loading)
+        val result = getResult { api.getVideoById(videoId) }
         emit(result)
     }.flowOn(Dispatchers.IO)
 }

@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vktech.databinding.ItemSeriesBinding
 import com.example.vktech.domain.entity.VideoInfoEntity
 import com.example.vktech.util.load
+import com.example.vktech.util.toDurationFormat
 
 class VideoAdapter(private val onItemClickListener: (VideoInfoEntity) -> Unit): ListAdapter<VideoInfoEntity, VideoAdapter.ViewHolder>(VideoDiffCallback()) {
     inner class ViewHolder(private val binding: ItemSeriesBinding): RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: VideoInfoEntity) {
             binding.titleTv.text = item.tag
-            binding.avaIv.load(item.videos.medium.thumbnail)
+            binding.avaIv.load(item.video.thumbnail)
+            binding.timeTv.text = item.duration.toDurationFormat()
 
             binding.root.setOnClickListener{
                 onItemClickListener(item)

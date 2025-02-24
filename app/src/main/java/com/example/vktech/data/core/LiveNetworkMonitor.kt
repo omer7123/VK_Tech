@@ -1,10 +1,8 @@
 package com.example.vktech.data.core
 
 import android.content.Context
-import android.content.pm.Capability
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.util.Log
 import javax.inject.Inject
 
 class LiveNetworkMonitor @Inject constructor(

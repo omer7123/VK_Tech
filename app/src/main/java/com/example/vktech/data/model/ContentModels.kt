@@ -4,16 +4,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ContentModel(
-    val total: Int,
-    val totalHits: Int,
     val hits: List<VideoInfoModel>
 )
 
 @Serializable
 data class VideoInfoModel(
     val id: Int,
-    val pageURL: String,
-    val type: String,
+    val views: Int,
+    val likes: Int,
     val duration: Int,
     val tags: String,
     val videos: VideoSizeModel

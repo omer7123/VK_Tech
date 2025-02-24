@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
     suspend fun getLatestVideo(): Flow<Resource<ContentModel>>
+    suspend fun getVideoById(videoId: Int): Flow<Resource<ContentModel>>
 }

@@ -2,39 +2,36 @@ package com.example.vktech.data.converters
 
 import com.example.vktech.data.model.ContentModel
 import com.example.vktech.data.model.VideoInfoModel
-import com.example.vktech.data.model.VideoModel
 import com.example.vktech.data.model.VideoSizeModel
 import com.example.vktech.domain.entity.ContentEntity
 import com.example.vktech.domain.entity.VideoEntity
 import com.example.vktech.domain.entity.VideoInfoEntity
-import com.example.vktech.domain.entity.VideoSizeEntity
 
 fun ContentModel.toEntity(): ContentEntity{
     return ContentEntity(
-        total = total,
-        totalHits = totalHits,
         hits = hits.map {videoModel ->
             videoModel.toEntity()
         }
     )
 }
 
+fun ContentModel.toVideoInfoEntity(): VideoInfoEntity{
+    return hits[0].toEntity()
+}
+
 private fun VideoInfoModel.toEntity(): VideoInfoEntity{
     return VideoInfoEntity(
         id = id,
-        pageURL = pageURL,
-        type = type,
+        views = views,
+        likes = likes,
         duration = duration,
         tag = tags.substringBefore(","),
-        videos = videos.toEntity()
+        video = videos.toEntity()
     )
 }
 
-private fun VideoSizeModel.toEntity() = VideoSizeEntity(
-    medium = medium.toEntity()
+private fun VideoSizeModel.toEntity() = VideoEntity(
+    url = this.medium.url,
+    thumbnail = this.medium.thumbnail,
 )
 
-private fun VideoModel.toEntity() = VideoEntity(
-    url = url,
-    thumbnail = thumbnail
-)

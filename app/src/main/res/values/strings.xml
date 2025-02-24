@@ -5,5 +5,7 @@
     <string name="name_user">Coverr-Free-Footage</string>
     <string name="videos">Видео</string>
     <string name="start_playing">Начать просмотр с первого видео</string>
-    <string name="last_video">Последние видео</string>
+    <string name="last_video">Новые видео</string>
+    <string name="title_views">Просмотры: %1$s</string>
+    <string name="likes_title">Понравилось: %1$s</string>
 </resources>
