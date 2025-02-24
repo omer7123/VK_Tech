@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.vktech.R
 import com.example.vktech.databinding.FragmentContentBinding
-import com.example.vktech.domain.entity.ContentEntity
 import com.example.vktech.domain.entity.VideoInfoEntity
 import com.example.vktech.presentation.content.ContentScreenState
 import com.example.vktech.presentation.content.ContentViewModel
@@ -77,6 +76,7 @@ class ContentFragment : Fragment() {
                 binding.swipeRefresh.isEnabled = !recyclerView.canScrollVertically(-1)
             }
         })
+
     }
 
     private fun initView() {
@@ -101,7 +101,9 @@ class ContentFragment : Fragment() {
                 renderContent(state.data)
             }
             is ContentScreenState.Error -> {
-                requireContext().showToast(state.msg)
+                requireContext().showToast(
+                    getString(state.msgId)
+                )
             }
             ContentScreenState.Initial -> Unit
             ContentScreenState.Loading -> {
@@ -115,10 +117,16 @@ class ContentFragment : Fragment() {
         binding.progress.isVisible = true
     }
 
-    private fun renderContent(data: ContentEntity) {
+    private fun renderContent(data: List<VideoInfoEntity>) {
         binding.progress.isVisible = false
         binding.content.isVisible = true
-        adapter.submitList(data.hits)
+        binding.fabBtn.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_contentFragment_to_playerFragment,
+                bundleOf(PlayerFragment.VIDEO_ID to data[0].id)
+            )
+        }
+        adapter.submitList(data)
         binding.swipeRefresh.isRefreshing = false
     }
 

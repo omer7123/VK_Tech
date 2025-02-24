@@ -19,11 +19,9 @@ abstract class BaseDataSource {
             }
 
         }catch (noNetwork: NoNetworkException) {
-            Log.e("BASE", "No internet connection", noNetwork) // Логируем исключение
             return Resource.Error(noNetwork.message ?: "No internet", 0)
 
         } catch (e: Exception) {
-            Log.e("BASE", "Unexpected error", e) // Логируем другие ошибки
             return Resource.Error(e.message ?: "Unknown error", 429)
         }
 

@@ -1,5 +1,7 @@
 package com.example.vktech.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -8,7 +10,9 @@ data class ContentModel(
 )
 
 @Serializable
+@Entity
 data class VideoInfoModel(
+    @PrimaryKey
     val id: Int,
     val views: Int,
     val likes: Int,

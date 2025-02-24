@@ -2,6 +2,7 @@ package com.example.vktech.presentation.player
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vktech.R
 import com.example.vktech.data.core.result.Resource
 import com.example.vktech.domain.useCases.GetVideoByIdUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,8 +23,13 @@ class PlayerViewModel @Inject constructor(
         viewModelScope.launch {
             getVideoByIdUseCase(videoId).collect { resource ->
                 when (resource) {
-                    is Resource.Error -> _stateScreen.value =
-                        PlayerScreenState.Error(resource.msg.toString())
+                    is Resource.Error -> {
+                        _stateScreen.value = if (resource.responseCode == 0){
+                            PlayerScreenState.Error(R.string.internet_error)
+                        }else{
+                            PlayerScreenState.Error(R.string.unknown_error)
+                        }
+                    }
 
                     Resource.Loading -> _stateScreen.value = PlayerScreenState.Loading
                     is Resource.Success -> _stateScreen.value =

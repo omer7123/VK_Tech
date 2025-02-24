@@ -99,7 +99,11 @@ class PlayerFragment : Fragment() {
     }
 
     private fun renderError() {
-
+        binding.player.isVisible = false
+        binding.likesTv.isVisible = false
+        binding.viewsTv.isVisible = false
+        binding.progressCircular.isVisible = false
+        binding.placeholder.layout.isVisible = true
     }
 
     private fun renderContent(data: VideoInfoEntity, currentPosition: Long, isPlaying: Boolean) {

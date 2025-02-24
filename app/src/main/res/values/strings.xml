@@ -8,4 +8,8 @@
     <string name="last_video">Новые видео</string>
     <string name="title_views">Просмотры: %1$s</string>
     <string name="likes_title">Понравилось: %1$s</string>
+    <string name="internet_error">Извините, у Вас проблемы с соединением или, возможно, выключен VPN</string>
+    <string name="internet_error_local">Выключен VPN, нет интернета. Данные локальные</string>
+    <string name="unknown_error">Произошла непредвиденная ошибка, попробуйте чуть позже</string>
+
 </resources>

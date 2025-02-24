@@ -1,8 +1,11 @@
 package com.example.vktech.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.vktech.data.core.LiveNetworkMonitor
 import com.example.vktech.data.core.NetworkMonitor
+import com.example.vktech.data.local.room.AppDatabase
+import com.example.vktech.data.local.room.ContentDao
 import com.example.vktech.data.remote.interceptors.ApiKeyInterceptor
 import com.example.vktech.data.remote.ContentApi
 import com.example.vktech.data.remote.interceptors.NetworkMonitorInterceptor
@@ -78,5 +81,21 @@ class DataModule {
     @Singleton
     fun provideContentApi(retrofit: Retrofit): ContentApi {
         return retrofit.create(ContentApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java,
+            "content_db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideContentDao(appDatabase: AppDatabase): ContentDao {
+        return appDatabase.contentDao()
     }
 }
